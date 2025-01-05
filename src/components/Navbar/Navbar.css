@@ -1,0 +1,72 @@
+/* Navbar.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  transition: top 0.3s ease;
+  z-index: 1000;
+  height: 80px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1024px;
+  padding: 0 1rem;
+  width: 100%;
+}
+
+.navbar.hidden {
+  top: -80px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 15px;
+}
+
+.nav-link {
+  color: var(--primary-color);
+  text-decoration: none;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 10px;
+}
+
+.nav-link:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+
+.nav-icon {
+  display: none;
+}
+
+@media (max-width: 660px) {
+  .nav-links {
+    display: none;
+  }
+
+  .nav-icon {
+    display: block;
+  }
+
+  .ant-drawer-body .drawer-link {
+    display: block;
+    padding: 1rem 0;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1rem;
+    transition: color 0.3s;
+  }
+
+  .ant-drawer-body .drawer-link:hover {
+    color: var(--secondary-color);
+  }
+}

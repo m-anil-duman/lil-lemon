@@ -1,0 +1,47 @@
+/* About Page Styles */
+.mainSection {
+    padding: 20px 0;
+  }
+  
+  .container {
+    max-width: 1024px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+  
+  .specials-section {
+    margin: 2rem 0;
+  }
+  
+  .text-center {
+    text-align: center;
+    color: var(--primary-color);
+  }
+  
+  .mb-20 {
+    margin-bottom: 20px;
+  }
+  
+  iframe {
+    border-radius: 16px;
+  }
+  
+  @media screen and (max-width: 1064px) {
+    iframe {
+      width: 580px;
+    }
+  }
+  
+  @media screen and (max-width: 620px) {
+    iframe {
+      width: 400px;
+    }
+  }
+  
+  @media screen and (max-width: 550px) {
+    iframe {
+      width: 250px;
+      height: 250px;
+    }
+  }
+  

@@ -1,95 +1,37 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+// src/app/page.js
+import React from 'react';
+import Introduction from '../components/Introduction/Introduction.js';
+import DishCard from '../components/DishCard/DishCard';
+import image from '../../public/assets/restauranfood.jpg'
+import Button from '@/components/Button/Button.js';
+export default async function Home() {
+  // Fetch the menu data from the API
+  const response = await fetch('https://little-lemon-restaurant-database.onrender.com/menu', {
+    cache: 'no-store', // Disable caching for dynamic data
+  });
 
-export default function Home() {
+  if (!response.ok) {
+    throw new Error(`Failed to fetch menu data: ${response.status}`);
+  }
+
+  const menuData = await response.json();
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+    <div>
+      <Introduction
+        title="Welcome to Our Restaurant"
+        description="Your gateway to the rich flavors of Italy, Greece, and Turkey. Savor authentic Mediterranean dishes, from Greek souvlaki and Italian pasta to Turkish kebabs, all crafted with the freshest ingredients. Enjoy our warm ambiance and let us take you on a culinary journey. Experience the essence of the Mediterranean at The Little Lemon Restaurant!"
+        image={image}
+        reverse={false}
+      />
+      <div className='container content-wrapper'>
+        <header className='space-between flex-row'><h2>This Week&apos;s Specials</h2> <Button to={'/reservation'} >Reserve a Table</Button></header>
+        <div className="menu-list">
+          {menuData.map((dish) => (
+            <DishCard key={dish.id} dish={dish} />
+          ))}
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
     </div>
   );
 }

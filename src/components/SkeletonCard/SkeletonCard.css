@@ -1,0 +1,25 @@
+/* src/components/SkeletonCard.css */
+.skeleton-card {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--grey-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    width: 100%;
+  }
+  
+  .skeleton-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .skeleton-card-image {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    
+  }
+  

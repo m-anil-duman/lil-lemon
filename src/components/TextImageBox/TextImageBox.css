@@ -1,0 +1,52 @@
+/* src/components/TextImageBox.css */
+.text-image-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    border: 1px solid var(--grey-color);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
+    margin-bottom: 16px;
+  }
+  
+  .text-image-box.reverse {
+    flex-direction: row-reverse;
+  }
+  
+  .text-content {
+    flex: 1;
+    padding: 16px;
+    font-size: 1rem;
+    color: var(--primary-color);
+    text-align: justify;
+  }
+  
+  .image-content {
+    flex: 1;
+    max-width: 50%;
+    padding: 16px;
+  }
+  
+  .image-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+  }
+  
+  @media (max-width: 768px) {
+    .text-image-box {
+      flex-direction: column;
+    }
+  
+    .text-image-box.reverse {
+      flex-direction: column;
+    }
+  
+    .image-content {
+      max-width: 100%;
+    }
+  }
+  

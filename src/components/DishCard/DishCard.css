@@ -1,0 +1,57 @@
+/* src/components/DishCard.css */
+.dish-card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--grey-color);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.dish-card:hover {
+  transform: scale(1.05);
+}
+
+.dish-card-image {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+
+.dish-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.dish-card-content {
+  padding: 16px;
+  background-color: var(--primary-color);
+}
+
+.dish-card-title {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--secondary-color);
+}
+
+.dish-card-price {
+  margin: 8px 0;
+  font-size: 1.1rem;
+  color: var(--grey-color);
+}
+
+.dish-card-details {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--grey-color);
+}
+.DishImage {
+  object-fit: cover;
+  width: 100%;
+  height: 220px;
+  border-radius: 16px 16px 0 0;
+}

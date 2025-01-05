@@ -1,0 +1,162 @@
+/* App.css */
+:root {
+  --primary-color: #495E57;
+  --secondary-color: #F4CE14;
+  --grey-color: #E3E3E3;
+}
+
+html, body {
+height: 100%;
+margin: 0;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: white;
+}
+main {
+  flex:1
+}
+h1,h2,h3,h4{
+  font-family: Arial, Helvetica, sans-serif;
+  color: var(--primary-color);
+  
+}
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.introduction {
+  padding: 2rem;
+  text-align: center;
+}
+
+
+.dish-card {
+  border: 1px solid var(--grey-color);
+  border-radius: 5px;
+  padding: 1rem;
+  margin: 1rem;
+  text-align: center;
+}
+
+.text-yellow{
+  color: #F4CE14;
+}
+.text-white{
+  color: white;
+}
+.text-green {
+  color: var(--primaryColor);
+}
+.main-content {
+width: 90%;
+}
+
+.menu-section {
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+.menu-list {
+  display: grid;
+  gap: 16px;
+}
+.space-between { 
+  display: flex;
+  justify-content: space-between;
+}
+@media (min-width: 1024px) {
+  .menu-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .menu-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 767px) {
+  .menu-list {
+    grid-template-columns: 1fr;
+  }
+}
+.mb-20{
+  margin-bottom: 20px;
+}
+iframe{
+  border-radius: 16px;
+}
+.text-center{
+  text-align: center;
+  color: var(--primary-color);
+}
+@media screen and (max-width: 1064px) {
+  iframe {
+      width: 580px;
+  }
+}
+@media screen and (max-width: 620px) {
+  iframe {
+      width: 400px;
+  }
+}
+@media screen and (max-width:550px){
+  iframe{
+      width: 250px;
+      height: 250px;
+  }
+}
+.custom-button {
+    background-color: var(--grey-color);
+    color: var(--primary-color);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border-radius: 5px;
+    height: 50px;
+    align-self: center;
+  }
+  
+  .custom-button:hover {
+    background-color: var(--secondary-color);
+  }
+  /* Globals.css */
+
+/* Layout wrapper */
+.layout-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Main content spacing */
+.main-content {
+  flex: 1;
+  margin-top: 80px; /* Adjust to the height of your Navbar */
+  padding: 0 20px; /* Optional: Add some horizontal padding */
+}
+
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px; /* Ensure the height matches */
+  z-index: 1000;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

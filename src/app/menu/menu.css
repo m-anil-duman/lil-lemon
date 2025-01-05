@@ -1,0 +1,11 @@
+/* src/app/menu/menu.css */
+.menu-container {
+    padding: 20px;
+  }
+  
+  .menu-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
