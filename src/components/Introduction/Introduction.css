@@ -2,8 +2,7 @@
     background: #495E57;
     margin-bottom: 65px;
   }
-  .page-top-section-margin{
-  }
+  
   
   .page-top-container {
     display: grid;
@@ -32,9 +31,7 @@
     color: var(--primaryColor);
     transition: .2s ease;
   }
-  .top-section-page-image-margin{
-  }
-  
+
   @media screen and (max-width: 740px) {
     .page-top-container {
         gap: 20px;
@@ -48,11 +45,7 @@
       margin-top: 40px;
     }
   }
-  @media screen and (min-width: 740px) {
-    .page-top-section-left{
-      
-    }
-  }
+
   .page-main-image {
    
     justify-self: end;
