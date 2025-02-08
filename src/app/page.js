@@ -2,19 +2,27 @@
 import React from 'react';
 import Introduction from '../components/Introduction/Introduction.js';
 import DishCard from '../components/DishCard/DishCard';
-import image from '../../public/assets/restauranfood.jpg'
+import image from '../../public/assets/restauranfood.jpg';
 import Button from '@/components/Button/Button.js';
+
 export default async function Home() {
-  // Fetch the menu data from the API
-  const response = await fetch('https://little-lemon-restaurant-database.onrender.com/menu', {
-    cache: 'no-store', // Disable caching for dynamic data
-  });
+  let menuData = [];
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch menu data: ${response.status}`);
+  try {
+    const response = await fetch('https://little-lemon-restaurant-database.onrender.com/menu', {
+      cache: 'no-store', // Disable caching for dynamic data
+    });
+
+    if (!response.ok) {
+      console.error(`Failed to fetch menu data: ${response.status}`);
+    } else {
+      // Read the response as text first so we can safely check for empty content.
+      const text = await response.text();
+      menuData = text ? JSON.parse(text) : [];
+    }
+  } catch (error) {
+    console.error('Error fetching menu data:', error);
   }
-
-  const menuData = await response.json();
 
   return (
     <div>
@@ -25,7 +33,10 @@ export default async function Home() {
         reverse={false}
       />
       <div className='container content-wrapper'>
-        <header className='space-between flex-row'><h2>This Week&apos;s Specials</h2> <Button to={'/reservation'} >Reserve a Table</Button></header>
+        <header className='space-between flex-row'>
+          <h2>This Week&apos;s Specials</h2>
+          <Button to={'/reservation'}>Reserve a Table</Button>
+        </header>
         <div className="menu-list">
           {menuData.map((dish) => (
             <DishCard key={dish.id} dish={dish} />
