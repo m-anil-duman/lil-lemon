@@ -1,6 +1,6 @@
 // src/app/menu/page.js
 import React from 'react';
-import Introduction from '../../components/Introduction/Introduction';
+import Introduction from '@/components/Introduction/Introduction';
 import DishCard from '../../components/DishCard/DishCard';
 import SkeletonCard from '../../components/SkeletonCard/SkeletonCard';
 import image from '../../../public/assets/Mario and Adrian A.jpg';
@@ -10,16 +10,26 @@ async function fetchMenuData() {
   try {
     const response = await fetch('https://little-lemon-restaurant-database.onrender.com/menu', {
       cache: 'no-store',
+      headers: {
+        'Accept': 'application/json',
+      },
+      next: { revalidate: 60 } // Revalidate every minute as a fallback
     });
 
     if (!response.ok) {
-      console.error('Failed to fetch menu data:', response.status);
-      return [];
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    // Read as text first to ensure we have a valid JSON payload.
     const text = await response.text();
-    return text ? JSON.parse(text) : [];
+    if (!text) {
+      throw new Error('Empty response received');
+    }
+
+    try {
+      return JSON.parse(text);
+    } catch (e) {
+      throw new Error(`JSON parsing failed: ${e.message}\nReceived: ${text}`);
+    }
   } catch (error) {
     console.error('Error fetching menu data:', error);
     return [];
@@ -30,17 +40,20 @@ export default async function Menu() {
   const menuData = await fetchMenuData();
 
   const renderDish = (category) => (
-    <div className="menuPart">
+    <div className="menuPart" key={category}>
       <div className="menuPartTitle">
         <h2>{category}</h2>
       </div>
       <div className="menu-list">
-        {menuData.length > 0
-          ? menuData
+        {menuData.length > 0 ? (
+          menuData
             .filter((dish) => dish.category === category)
             .map((dish) => <DishCard key={dish.id} dish={dish} />)
-          : // Fallback UI while data is not available
-          Array.from({ length: 3 }).map((_, index) => <SkeletonCard key={index} />)}
+        ) : (
+          Array.from({ length: 3 }).map((_, index) => (
+            <SkeletonCard key={index} />
+          ))
+        )}
       </div>
     </div>
   );
@@ -51,7 +64,7 @@ export default async function Menu() {
         <Introduction
           title="Welcome to Our Restaurant"
           subtitle="Best place to enjoy delicious meals."
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque nisl eros, pulvinar facilisis justo mollis, auctor consequat urna."
+          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit."
           image={image}
           type_for_description="h3"
           reverse
@@ -60,9 +73,17 @@ export default async function Menu() {
           <section className="menu-section mb-20">
             <h1>Our Menu</h1>
             <p>Explore our delicious meals.</p>
-            {renderDish('Entrees')}
-            {renderDish('Appetizers')}
-            {renderDish('Desserts')}
+            {menuData.length === 0 ? (
+              <div className="error-message">
+                Unable to load menu items. Please try again later.
+              </div>
+            ) : (
+              <>
+                {renderDish('Entrees')}
+                {renderDish('Appetizers')}
+                {renderDish('Desserts')}
+              </>
+            )}
           </section>
         </div>
       </div>
