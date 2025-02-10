@@ -5,31 +5,18 @@ import DishCard from '../../components/DishCard/DishCard';
 import SkeletonCard from '../../components/SkeletonCard/SkeletonCard';
 import image from '../../../public/assets/Mario and Adrian A.jpg';
 import './menu.css';
+// Mark the page as static
+export const dynamic = 'force-static';
 
-async function fetchMenuData() {
+async function getMenuData() {
   try {
-    const response = await fetch('https://little-lemon-restaurant-database.onrender.com/menu', {
-      cache: 'no-store',
-      headers: {
-        'Accept': 'application/json',
-      },
-      next: { revalidate: 60 } // Revalidate every minute as a fallback
-    });
+    const response = await fetch('https://little-lemon-restaurant-database.onrender.com/menu');
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
 
-    const text = await response.text();
-    if (!text) {
-      throw new Error('Empty response received');
-    }
-
-    try {
-      return JSON.parse(text);
-    } catch (e) {
-      throw new Error(`JSON parsing failed: ${e.message}\nReceived: ${text}`);
-    }
+    return response.json();
   } catch (error) {
     console.error('Error fetching menu data:', error);
     return [];
@@ -37,7 +24,7 @@ async function fetchMenuData() {
 }
 
 export default async function Menu() {
-  const menuData = await fetchMenuData();
+  const menuData = await getMenuData();
 
   const renderDish = (category) => (
     <div className="menuPart" key={category}>
